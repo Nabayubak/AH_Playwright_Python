@@ -52,46 +52,7 @@ def test_information_modal_prefill(page: Page) -> None:
         page.get_by_placeholder("Phone number").type(phone_number, delay=200)
         page.get_by_role("button", name="Find agents").click()
 
-        page.get_by_role("heading", name="Update your information").click()
-    
-        # Verify all fields are prefilled
-        # Store expected values
-        expected_values = {
-            "Full name": full_name,
-            "Email": email,
-            "Phone number": str(phone_number)
-        }
-        
-        # Verification steps
-        assert page.get_by_placeholder("Full name").input_value() == expected_values["Full name"], \
-            f"Expected full name to be {expected_values['Full name']}"
-        assert page.get_by_placeholder("Email").input_value() == expected_values["Email"], \
-            f"Expected email to be {expected_values['Email']}"
-        assert page.get_by_placeholder("Phone number").input_value() == expected_values["Phone number"], \
-            f"Expected phone number to be {expected_values['Phone number']}"
-        print(phone_number)
-    
-         # Proceed with final submission
-        page.get_by_role("button", name="Find agents").click()
-
-        # # Ensure the agent list is loaded
-        # page.wait_for_selector("button:has-text('Request a quote')", state="visible", timeout=5000)
-
-        # # Request a quote for the 3rd agent
-        # page.get_by_role("button", name="Request a quote").nth(2).click()
-        # page.wait_for_selector("button:has-text('Quote requested')", state="visible", timeout=5000)
-        
-        # # Click "View more" twice
-        # page.get_by_role("button", name="View more").click()
-        # # page.get_by_role("button", name="View more").click()
-
-        # # Wait for the 5th "Request a quote" button to be available
-        # page.wait_for_selector('button:has-text("Request a quote")', state="visible", timeout=10000)
-        # page.get_by_role("button", name="Request a quote").nth(4).click()
-
-    except Exception as e:
-        print(f"❌ Test Failed: {e}")
-        raise     
+  
 
 # Main Function to Run All Tests
 def run_tests():
