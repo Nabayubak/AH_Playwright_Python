@@ -1,7 +1,7 @@
 name: Run Automation Script
 on:
   schedule:
-    - cron: '30 13 * * *' # Runs at 13:30 UTC (1:30 PM UTC) daily
+    - cron: '0 14 * * *'
 jobs:
   run-script:
     runs-on: ubuntu-latest
