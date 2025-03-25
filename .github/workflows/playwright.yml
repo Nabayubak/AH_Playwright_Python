@@ -14,4 +14,4 @@ jobs:
       with:
         python-version: '3.x' # Adjust if needed
     - name: Run script
-      run: python run_tests.py # Replace with your script command
+      run: python .\run_tests.py # Replace with your script command
