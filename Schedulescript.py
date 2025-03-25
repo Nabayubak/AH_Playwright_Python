@@ -8,4 +8,4 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Run script
-        run: python Schedulescript.py # Adjust for your script
+        run: python run_tests.py # Adjust for your script
