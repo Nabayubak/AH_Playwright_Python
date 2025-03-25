@@ -2,7 +2,7 @@ name: Run Automation Script
 
 on:
   schedule:
-    - cron: '30 17 * * *' # Runs at 14:00 UTC (2:00 PM UTC) daily
+    - cron: '42 17 * * *' # Runs at 14:00 UTC (2:00 PM UTC) daily
 
 jobs:
   run-script:
