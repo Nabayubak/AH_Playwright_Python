@@ -20,7 +20,7 @@ def navigate_to_signup (page: Page) -> None:
     print("✅ Signup page loaded successfully.")
 
 
-#test    
+  
 # Test Case 1: Valid Signup test (signup page and basicinfo page)
 def test_signup(page: Page) -> None:
     try:
@@ -29,9 +29,9 @@ def test_signup(page: Page) -> None:
         password = "Enter@123"
         full_name = generate_unique_fullname()
         agency_name = generate_random_word_with_inc()
-        # phone_number = generate_random_phone()
-        # if len(phone_number) != 10:
-        #     raise ValueError("Generated phone number is not 10 digits")
+        phone_number = generate_random_phone()
+        if len(phone_number) != 10:
+            raise ValueError("Generated phone number is not 10 digits")
         location = "30017"
         apt = "2B"
         image_path = os.path.abspath("utils/images/TinyTake31-12-2024-12-00-55.png")
