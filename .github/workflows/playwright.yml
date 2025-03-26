@@ -14,6 +14,7 @@ jobs:
     
     - name: Set up Python
       uses: actions/setup-python@v2  # Use a stable version of actions/setup-python
+
       with:
         python-version: '3.x'  # Adjust if needed
 
@@ -29,3 +30,4 @@ jobs:
     - name: Run tests with pytest and generate report
       run: |
         pytest --html=report.html --self-contained-html  # Generate the HTML report
+
