@@ -3,16 +3,24 @@ name: Run Automation Script
 on:
   workflow_dispatch:
   schedule:
-    - cron: '08 10 * * *' # Runs at 1:00 UTC (1:00 PM UTC) daily
+    - cron: '0 13 * * *'  # Runs at 1:00 PM UTC daily
 
 jobs:
   run-script:
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v3  # Checkout the repository code
+
     - name: Set up Python (optional, if Python script)
       uses: actions/setup-python@v4
       with:
-        python-version: '3.x' # Adjust if needed
+        python-version: '3.x'  # Adjust if needed
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pytest  # Install pytest or any other dependencies
+
     - name: Run script
-      run: python run_tests.py # Replace with your script command
+      run: python run_tests.py  # Replace with your script command
