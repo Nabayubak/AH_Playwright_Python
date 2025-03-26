@@ -23,4 +23,4 @@ jobs:
        
 
     - name: Run script
-      run: python \pages\test_request_quote_flow.py  # Replace with your script command
+      run: python .\pages\test_request_quote_flow.py  # Replace with your script command
