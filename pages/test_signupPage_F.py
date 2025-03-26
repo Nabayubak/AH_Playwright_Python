@@ -52,6 +52,7 @@ def test_signup(page: Page) -> None:
 
         # fill phone field
         phone_input = page.locator("input[name='phoneNumber']")
+        page.wait_for_load_state("networkidle")
         phone_input.type(phone_number, delay=200)
 
         # Verify formatted value
