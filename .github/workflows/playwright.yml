@@ -20,20 +20,17 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install pytest  # Install pytest or any other dependencies
+        pip install pytest  # Install pytest
         pip install playwright  # Install playwright
         pip install pytest-playwright  # Install pytest-playwright
         python -m playwright install  # Install necessary browsers for playwright
 
-    - name: Run tests with pytest
+    - name: Run tests with pytest and generate report
       run: |
-        pytest 
+        pytest --html=report.html --self-contained-html  # Generate the HTML report
 
     - name: Upload test report as an artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v2  # Use version v2 of upload-artifact
       with:
         name: test-report
         path: report.html
-
-
-
