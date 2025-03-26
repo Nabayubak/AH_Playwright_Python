@@ -260,7 +260,7 @@ def run_tests():
         ]:
             print(f"\n🎯 Executing test: {test_case.__name__}")
 
-            browser = playwright.chromium.launch(headless=True)
+            browser = playwright.chromium.launch(headless=False)
             context = browser.new_context()
             page = context.new_page()
 
