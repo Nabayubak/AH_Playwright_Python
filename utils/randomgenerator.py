@@ -13,7 +13,7 @@ def generate_random_email(domain="yopmail.com", length=10):
 
 def generate_random_phone(length=10):
     # Ensure the first digit is not zero
-    first_digit = str(random.randint(4, 9))
+    first_digit = str(random.randint(8, 9))
     while True:
         remaining_digits = ''.join(random.choices("456789", k=9))  # Generate a 10-digit number
         # Combine to form the phone number
