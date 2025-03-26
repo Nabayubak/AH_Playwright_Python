@@ -29,8 +29,4 @@ jobs:
       run: |
         pytest --html=report.html --self-contained-html  # Generate the HTML report
 
-    - name: Upload test report as an artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: test-report
-        path: report.html
+
