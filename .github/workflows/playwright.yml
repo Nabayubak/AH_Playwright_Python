@@ -27,7 +27,7 @@ jobs:
     - name: Run tests with pytest
       run: |
         python logtest.py 
-        python pages\test_loginPage_F.py
-        python pages\test_signupPage_F.py
-        python pages\test_request_quote_flow.py
-        
+        python pages/test_loginPage_F.py  # Corrected the path separator
+        python pages/test_signupPage_F.py  # Corrected the path separator
+        python pages/test_request_quote_flow.py  # Corrected the path separator
+        pytest --html=report.html --self-contained-html  # Run all tests and generate report
