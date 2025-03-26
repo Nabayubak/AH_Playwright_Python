@@ -52,8 +52,7 @@ def test_signup(page: Page) -> None:
 
         # fill phone field
         phone_input = page.locator("input[name='phoneNumber']")
-        # phone_input.fill(phone_number)
-        phone_input.type(phone_number, delay=100)
+        phone_input.type(phone_number, delay=200)
 
         # Verify formatted value
         expected_format = f"({phone_number[:3]}) {phone_number[3:6]} {phone_number[6:]}"

@@ -18,26 +18,88 @@ def navigate_to_search_home(page: Page) -> None:
     print("✅ Search home page loaded successfully.")
     
 
-def test_search_agent_commercial(page: Page) -> None:
-    try :
-    # Navigate to Search home
-        navigate_to_search_home(page)
+def navigate_to_signup (page: Page) -> None:
+    """Navigates to the signup page and verifies the URL."""
+    page.goto("https://dev.agents.agencyheight.com/signup")
+    expect(page).to_have_url("https://dev.agents.agencyheight.com/signup")
+    print("✅ Signup page loaded successfully.")
+    
+# Test Case 1: Valid Signup test (signup page and basicinfo page)
+def test_signup(page: Page) -> None:
+    try:
+    # Input Data
+        email = generate_random_email()
+        password = "Enter@123"
+        full_name = generate_unique_fullname()
+        agency_name = generate_random_word_with_inc()
+        phone_number = generate_random_phone()
+        if len(phone_number) != 10:
+            raise ValueError("Generated phone number is not 10 digits")
+        location = "30017"
+        apt = "2B"
+        image_path = os.path.abspath("utils/images/TinyTake31-12-2024-12-00-55.png")
+        if not os.path.exists(image_path):
+            raise FileNotFoundError(f"Image file not found: {image_path}")
+
+        # Navigate to Signup Page
+        navigate_to_signup(page)
+
+        # Fill Signup For
+        page.locator("label").first.click()
+        page.locator("input[name='email']", ).fill(email)
+        page.locator("input[name='password']").fill(password)
+        page.get_by_role("button", name="Sign up now", exact=True).click()
         page.wait_for_load_state("networkidle")
 
-        # page.get_by_text("Life", exact=True).click()
-        page.locator("//div[p[text()='Commercial']]").click()
-        page.get_by_placeholder("Zip code").click()
-        page.get_by_placeholder("Zip code").fill("30017")
-        page.locator("label").nth(3).click()
-        page.get_by_text("Workers Compensation", exact=True).click()
-        page.get_by_role("button", name="Search agents").click()
+        # Fill Additional Form Fields
+        page.locator("input[name='fullName']").fill(full_name)
+        page.locator("input[name='agencyName']").fill(agency_name)
 
-    # Ensure the agent list is loaded
-        page.wait_for_selector("button:has-text('Request a quote')", state="visible", timeout=5000)
-        
+        # fill phone field
+        phone_input = page.locator("input[name='phoneNumber']")
+        # phone_input.fill(phone_number)
+        phone_input.type(phone_number, delay=200)
+
+        # Verify formatted value
+        expected_format = f"({phone_number[:3]}) {phone_number[3:6]} {phone_number[6:]}"
+        expect(phone_input).to_have_value(expected_format)
+
+        # Optional: Debug output
+        print(f"Formatted Phone Number: {phone_input.input_value()}")
+        # Add validation
+        # current_value = phone_input.input_value()
+        # assert current_value == phone_number, f"Phone number mismatch. Expected {phone_number}, got {current_value}"
+
+        # page.locator("input[name='phoneNumber']").type(phone_number, delay=200)
+        page.locator("input[name='location.address']").type(location, delay=200)
+        page.wait_for_selector("div.pac-container div.pac-item", timeout=7000)
+        for _ in range(3):
+            page.locator("input[name='location.address']").press("ArrowDown")
+        page.locator("input[name='location.address']").press("Enter")
+        page.get_by_label("Apt").fill(apt)
+        checkbox = page.get_by_role("checkbox")
+        expect(checkbox).to_be_visible()
+        checkbox.check()
+
+        # Upload Image
+        page.locator("input[type='file']").set_input_files(image_path)
+        page.locator("//span[normalize-space()='Save changes']").click()
+
+        # Submit the Form
+        page.get_by_role("button", name="Finish Setup").click()
+        page.wait_for_url("https://dev.agents.agencyheight.com/dashboard", timeout=15000)
+        expect(page.get_by_role("heading", name="QR unlocked 🔓")).to_be_visible()
+
+        # Logout Flow
+        page.get_by_role("button", name="Close").click()
+        page.locator("div[class='mantine-11p3gcw']").click()
+        page.get_by_role("button", name="Log Out").click()
+        expect(page).to_have_url("https://dev.agents.agencyheight.com/login")
+
+        print("✅ Signup Test Passed: User successfully signed up and logged out.")
 
     except Exception as e:
-        print(f"❌ Test Failed: {e}")
+        print(f"❌ Signup Test Failed: {e}")
         raise
 
 # Main Function to Run All Tests
@@ -46,7 +108,7 @@ def run_tests():
     with sync_playwright() as playwright:
         for test_case in [
             
-            test_search_agent_commercial
+            test_signup
         ]:
             print(f"\n🎯 Executing test: {test_case.__name__}")
 
