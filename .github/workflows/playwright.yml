@@ -29,4 +29,11 @@ jobs:
       run: |
         pytest 
 
+    - name: Upload test report as an artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-report
+        path: report.html
+
+
 
