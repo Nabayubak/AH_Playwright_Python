@@ -1,9 +1,5 @@
 import pytest
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 6ca92e872e9d09732526af8506ba4aaef316b240
 # List of browsers to run tests in
 browsers = ["chromium", "firefox", "webkit"]
 
