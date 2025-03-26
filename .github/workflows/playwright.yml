@@ -24,4 +24,4 @@ jobs:
 
     - name: Run tests with pytest
       run: |
-        python run_tests.py --html=report.html --self-contained-html  # Pass arguments to script
+        python logintest.py --html=report.html --self-contained-html  # Pass arguments to script
