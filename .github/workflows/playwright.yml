@@ -27,6 +27,6 @@ jobs:
 
     - name: Run tests with pytest
       run: |
-        pytest --html=report.html --self-contained-html  # Generate the HTML report
+        pytest 
 
 
