@@ -1,5 +1,5 @@
 import pytest
-import subprocess
+
 
 
 # List of browsers to run tests in
