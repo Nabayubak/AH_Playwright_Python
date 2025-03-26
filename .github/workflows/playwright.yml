@@ -14,6 +14,7 @@ jobs:
     
     - name: Set up Python
       uses: actions/setup-python@v2  # Use a stable version of actions/setup-python
+
       with:
         python-version: '3.x'  # Adjust if needed
 
@@ -30,8 +31,3 @@ jobs:
       run: |
         pytest --html=report.html --self-contained-html  # Generate the HTML report
 
-    - name: Upload test report as an artifact
-      uses: actions/upload-artifact@v2  # Use version v2 of upload-artifact
-      with:
-        name: test-report
-        path: report.html

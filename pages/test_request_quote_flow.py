@@ -43,7 +43,7 @@ def test_search_agent_commercial(page: Page) -> None:
         navigate_to_search_home(page)
         page.wait_for_load_state("networkidle")
 
-        page.get_by_text("Commercial").click()
+        page.locator("//div[p[text()='Commercial']]").click()
         page.get_by_placeholder("Zip code").click()
         page.get_by_placeholder("Zip code").fill("30017")
         page.locator("label").nth(3).click()
@@ -260,7 +260,7 @@ def run_tests():
         ]:
             print(f"\n🎯 Executing test: {test_case.__name__}")
 
-            browser = playwright.chromium.launch(headless=False)
+            browser = playwright.chromium.launch(headless=True)
             context = browser.new_context()
             page = context.new_page()
 

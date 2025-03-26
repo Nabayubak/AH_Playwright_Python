@@ -1,5 +1,5 @@
 import pytest
-import sys
+
 
 # List of browsers to run tests in
 browsers = ["chromium", "firefox", "webkit"]
