@@ -11,18 +11,14 @@ from utils.randomgenerator import *
 
 
 # Helper Function: Navigate to Login Page
-def navigate_to_search_home(page: Page) -> None:
-    """Navigates to the login page and verifies the URL."""
-    page.goto("https://dev.agents.agencyheight.com/")
-    expect(page).to_have_url("https://dev.agents.agencyheight.com/")
-    print("✅ Search home page loaded successfully.")
-    
+
+
 def navigate_to_signup (page: Page) -> None:
     """Navigates to the signup page and verifies the URL."""
     page.goto("https://dev.agents.agencyheight.com/signup")
     expect(page).to_have_url("https://dev.agents.agencyheight.com/signup")
-    print("✅ Signup page loaded successfully.")
-        
+    print("✅ Signup page loaded successfully.")    
+    
 
 def test_signup(page: Page) -> None:
     try:
@@ -56,7 +52,6 @@ def test_signup(page: Page) -> None:
 
         # fill phone field
         phone_input = page.locator("input[name='phoneNumber']")
-        page.wait_for_load_state("networkidle")
         phone_input.type(phone_number, delay=200)
 
         # Verify formatted value
@@ -99,7 +94,7 @@ def test_signup(page: Page) -> None:
 
     except Exception as e:
         print(f"❌ Signup Test Failed: {e}")
-        raise    
+        raise
 
 # Main Function to Run All Tests
 def run_tests():
