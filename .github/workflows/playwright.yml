@@ -22,6 +22,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install pytest  # Install pytest or any other dependencies
         pip install playwright  # Install playwright
+        pip install pytest-playwright  # Install pytest-playwright
         python -m playwright install  # Install necessary browsers for playwright
 
     - name: Run tests with pytest
