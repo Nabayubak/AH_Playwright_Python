@@ -23,6 +23,7 @@ jobs:
         pip install pytest  # Install pytest
         pip install playwright  # Install playwright
         pip install pytest-playwright  # Install pytest-playwright
+        pip install pytest-html  # Install pytest-html to generate the HTML report
         python -m playwright install  # Install necessary browsers for playwright
 
     - name: Run tests with pytest and generate report
