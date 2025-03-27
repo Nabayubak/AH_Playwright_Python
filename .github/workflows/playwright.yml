@@ -3,7 +3,7 @@ name: Run Automation Script
 on:
   
   schedule:
-    - cron: '43 9 * * *' 
+    - cron: '50 9 * * *' 
 
 jobs:
   run-script:
