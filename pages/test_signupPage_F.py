@@ -54,14 +54,15 @@ def test_signup(page: Page) -> None:
 
         # fill phone field
         phone_input = page.locator("input[name='phoneNumber']")
-        phone_input.type(phone_number, delay=200)
+        phone_input.click()
+        phone_input.type(phone_number, delay=100)
 
         # Verify formatted value
         expected_format = f"({phone_number[:3]}) {phone_number[3:6]} {phone_number[6:]}"
         expect(phone_input).to_have_value(expected_format)
 
         # Optional: Debug output
-        print(f"Formatted Phone Number: {phone_input.input_value()}")
+        # print(f"Formatted Phone Number: {phone_input.input_value()}")
         # Add validation
         # current_value = phone_input.input_value()
         # assert current_value == phone_number, f"Phone number mismatch. Expected {phone_number}, got {current_value}"
