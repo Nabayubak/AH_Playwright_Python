@@ -51,6 +51,7 @@ def test_signup(page: Page) -> None:
         # Fill Additional Form Fields
         page.locator("input[name='fullName']").fill(full_name)
         page.locator("input[name='agencyName']").fill(agency_name)
+        page.locator("input[name='agencyName']").press("Tab")
 
         # fill phone field
         phone_input = page.locator("input[name='phoneNumber']")
@@ -61,13 +62,6 @@ def test_signup(page: Page) -> None:
         expected_format = f"({phone_number[:3]}) {phone_number[3:6]} {phone_number[6:]}"
         expect(phone_input).to_have_value(expected_format)
 
-        # Optional: Debug output
-        # print(f"Formatted Phone Number: {phone_input.input_value()}")
-        # Add validation
-        # current_value = phone_input.input_value()
-        # assert current_value == phone_number, f"Phone number mismatch. Expected {phone_number}, got {current_value}"
-
-        # page.locator("input[name='phoneNumber']").type(phone_number, delay=200)
         page.locator("input[name='location.address']").type(location, delay=200)
         page.wait_for_selector("div.pac-container div.pac-item", timeout=7000)
         for _ in range(3):

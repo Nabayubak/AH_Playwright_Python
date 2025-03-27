@@ -11,13 +11,18 @@ from utils.randomgenerator import *
 
 
 # Helper Function: Navigate to Login Page
-
+# def navigate_to_search_home(page: Page) -> None:
+#     """Navigates to the login page and verifies the URL."""
+#     page.goto("https://dev.agents.agencyheight.com/")
+#     expect(page).to_have_url("https://dev.agents.agencyheight.com/")
+#     print("✅ Search home page loaded successfully.")
 
 def navigate_to_signup (page: Page) -> None:
     """Navigates to the signup page and verifies the URL."""
     page.goto("https://dev.agents.agencyheight.com/signup")
     expect(page).to_have_url("https://dev.agents.agencyheight.com/signup")
-    print("✅ Signup page loaded successfully.")    
+    print("✅ Signup page loaded successfully.")
+
     
 
 def test_signup(page: Page) -> None:
@@ -49,17 +54,19 @@ def test_signup(page: Page) -> None:
         # Fill Additional Form Fields
         page.locator("input[name='fullName']").fill(full_name)
         page.locator("input[name='agencyName']").fill(agency_name)
+        page.locator("input[name='agencyName']").press("Tab")
 
         # fill phone field
         phone_input = page.locator("input[name='phoneNumber']")
-        phone_input.type(phone_number, delay=200)
+        phone_input.type(phone_number, delay=100)
 
         # Verify formatted value
         expected_format = f"({phone_number[:3]}) {phone_number[3:6]} {phone_number[6:]}"
         expect(phone_input).to_have_value(expected_format)
+        page.locator("input[name='phoneNumber']").press("Tab")
 
         # Optional: Debug output
-        print(f"Formatted Phone Number: {phone_input.input_value()}")
+        # print(f"Formatted Phone Number: {phone_input.input_value()}")
         # Add validation
         # current_value = phone_input.input_value()
         # assert current_value == phone_number, f"Phone number mismatch. Expected {phone_number}, got {current_value}"
