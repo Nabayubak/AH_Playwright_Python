@@ -3,7 +3,7 @@ name: Run Automation Script
 on:
   workflow_dispatch:  # Allows manual triggering
   schedule:
-    - cron: '25 11 * * *'  
+  - cron: '58 11 * * *'  
 
 jobs:
   run-script:
