@@ -3,7 +3,7 @@ name: Run Automation Script
 on:
   workflow_dispatch:  # Allows manual triggering
   schedule:
-    - cron: '50 9 * * *' 
+    - cron: '*/5 * * * *'  # Runs every 5 minutes (temporary for testing)
 
 jobs:
   run-script:
@@ -30,4 +30,6 @@ jobs:
     - name: Run tests with pytest and generate report
       run: |
         pytest --html=report.html --self-contained-html  # Generate the HTML report
-
+        
+    - name: Debug cron trigger
+      run: echo "Cron job triggered at $(date)"
