@@ -3,7 +3,7 @@ name: Run Automation Script
 on:
   workflow_dispatch:  # Allows manual triggering
   schedule:
-  - cron: '*/5 * * * *'  # Runs every 5 minutes (temporary for testing)
+  - cron: '*/1 * * * *'  # Runs every 5 minutes (temporary for testing)
 
 jobs:
   run-script:
