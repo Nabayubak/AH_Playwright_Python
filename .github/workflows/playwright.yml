@@ -3,7 +3,7 @@ name: Run Automation Script
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 9 * * *'  # Runs at 9:00 AM UTC daily
+    - cron: '0 10 * * *'  # Runs at 9:00 AM UTC daily
 
 jobs:
   run-script:
