@@ -1,5 +1,6 @@
 import sys
 import os
+import time
 
 from playwright.sync_api import sync_playwright, Page, expect
 
@@ -23,8 +24,9 @@ def navigate_to_signup (page: Page) -> None:
     expect(page).to_have_url("https://dev.agents.agencyheight.com/signup")
     print("✅ Signup page loaded successfully.")
 
-    
 
+  
+# Test Case 1: Valid Signup test (signup page and basicinfo page)
 def test_signup(page: Page) -> None:
     try:
     # Input Data
@@ -49,29 +51,27 @@ def test_signup(page: Page) -> None:
         page.locator("input[name='email']", ).fill(email)
         page.locator("input[name='password']").fill(password)
         page.get_by_role("button", name="Sign up now", exact=True).click()
-        page.wait_for_load_state("networkidle")
+        
+        page.wait_for_url("https://dev.agents.agencyheight.com/basic-info", timeout=15000)
+
+        # Upload Image
+        page.locator("input[type='file']").set_input_files(image_path)
+        page.locator("//span[normalize-space()='Save changes']").click()
+        time.sleep(10)
 
         # Fill Additional Form Fields
         page.locator("input[name='fullName']").fill(full_name)
         page.locator("input[name='agencyName']").fill(agency_name)
-        page.locator("input[name='agencyName']").press("Tab")
 
         # fill phone field
+        time.sleep(2)
         phone_input = page.locator("input[name='phoneNumber']")
-        phone_input.type(phone_number, delay=100)
+        phone_input.type(phone_number, delay=300)
 
         # Verify formatted value
         expected_format = f"({phone_number[:3]}) {phone_number[3:6]} {phone_number[6:]}"
         expect(phone_input).to_have_value(expected_format)
-        page.locator("input[name='phoneNumber']").press("Tab")
 
-        # Optional: Debug output
-        # print(f"Formatted Phone Number: {phone_input.input_value()}")
-        # Add validation
-        # current_value = phone_input.input_value()
-        # assert current_value == phone_number, f"Phone number mismatch. Expected {phone_number}, got {current_value}"
-
-        # page.locator("input[name='phoneNumber']").type(phone_number, delay=200)
         page.locator("input[name='location.address']").type(location, delay=200)
         page.wait_for_selector("div.pac-container div.pac-item", timeout=7000)
         for _ in range(3):
@@ -81,13 +81,12 @@ def test_signup(page: Page) -> None:
         checkbox = page.get_by_role("checkbox")
         expect(checkbox).to_be_visible()
         checkbox.check()
-
-        # Upload Image
-        page.locator("input[type='file']").set_input_files(image_path)
-        page.locator("//span[normalize-space()='Save changes']").click()
+        time.sleep(10)
 
         # Submit the Form
         page.get_by_role("button", name="Finish Setup").click()
+        page.wait_for_load_state("networkidle")
+        time.sleep(10)
         page.wait_for_url("https://dev.agents.agencyheight.com/dashboard", timeout=15000)
         expect(page.get_by_role("heading", name="QR unlocked 🔓")).to_be_visible()
 
